@@ -7,6 +7,7 @@ import sys
 # For imports to work during setup and afterwards
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from utils import supported_distributions, identify_distribution, sh
+from shutil import copyfile
 
 MininetVersion = "2.3.0d6"
 FRRoutingVersion = "7.1"
@@ -64,6 +65,8 @@ def install_mininet(output_dir: str, pip_install=True):
     sh("git clone https://github.com/mininet/mininet.git", cwd=output_dir)
     sh("git checkout %s" % MininetVersion,
        cwd=os.path.join(output_dir, "mininet"))
+    if dist.NAME == "CentOS":
+        copyfile("install.sh", "mininet/util/install.sh")
     sh("mininet/util/install.sh %s -s ." % mininet_opts,
        cwd=output_dir)
 
@@ -88,6 +91,13 @@ def install_libyang(output_dir: str):
         cmd = "rpm -ivh"
         libyang_url = "https://ci1.netdef.org/artifact/LIBYANG-YANGRELEASE" \
                       "/shared/build-10/Fedora-29-x86_64-Packages/"
+        packages.extend(["libyang-0.16.111-0.x86_64.rpm",
+                         "libyang-devel-0.16.111-0.x86_64.rpm"])
+    elif dist.NAME == "CentOS":
+        dist.install("pcre-devel")
+        cmd = "rpm -ivh"
+        libyang_url = "https://ci1.netdef.org/artifact/LIBYANG-YANGRELEASE" \
+                      "/shared/build-10/CentOS-7-x86_64-Packages/"
         packages.extend(["libyang-0.16.111-0.x86_64.rpm",
                          "libyang-devel-0.16.111-0.x86_64.rpm"])
     else:
