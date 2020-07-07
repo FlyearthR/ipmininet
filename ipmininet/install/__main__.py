@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
     # Enable IPv6 (disabled by mininet installation)
 
-    if args.all or args.enable_ipv6:
+    if args.enable_ipv6:
         enable_ipv6()
 
     # Install test dependencies
