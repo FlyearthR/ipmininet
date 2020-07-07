@@ -188,7 +188,7 @@ def install_openr(output_dir: str, openr_release=OpenrRelease,
 
 
 def update_grub():
-    if dist.NAME == "Fedora":
+    if dist.NAME == "Fedora" or dist.NAME == "CentOS":
         cmd = "grub2-mkconfig --output=/boot/grub2/grub.cfg"
     elif dist.NAME == "Ubuntu" or dist.NAME == "Debian":
         cmd = "update-grub"
