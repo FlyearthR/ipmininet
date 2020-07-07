@@ -109,6 +109,13 @@ class Fedora(Distribution):
     PIP_CMD = "pip"
 
 
+class CentOS(Distribution):
+    NAME = "CentOS"
+    INSTALL_CMD = "yum -y install"
+    UPDATE_CMD = "true"
+    PIP_CMD = "pip"
+
+
 def supported_distributions() -> List[Type]:
     return Distribution.__subclasses__()
 
