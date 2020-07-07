@@ -66,7 +66,7 @@ def install_mininet(output_dir: str, pip_install=True):
     sh("git checkout %s" % MininetVersion,
        cwd=os.path.join(output_dir, "mininet"))
     if dist.NAME == "CentOS":
-        copyfile("ipmininet/install/install.sh", "mininet/util/install.sh")
+        copyfile("ipmininet/install/install.sh", output_dir+"/mininet/util/install.sh")
     sh("mininet/util/install.sh %s -s ." % mininet_opts,
        cwd=output_dir)
 
