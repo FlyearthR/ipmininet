@@ -396,7 +396,6 @@ function ovs {
 
     if [ "$DIST" = "CentOS" ]; then
         yum install wget openssl-devel  python-sphinx gcc make python-devel openssl-devel kernel-devel graphviz kernel-debug-devel autoconf automake rpm-build redhat-rpm-config libtool python-twisted-core python-zope-interface PyQt4 desktop-file-utils libcap-ng-devel groff checkpolicy selinux-policy-devel -y
-        useradd ovs
         su - ovs
         mkdir -p ~/rpmbuild/SOURCES
         wget http://openvswitch.org/releases/openvswitch-2.9.2.tar.gz
