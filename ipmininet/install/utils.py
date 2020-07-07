@@ -133,4 +133,7 @@ def identify_distribution() -> Optional[Distribution]:
     if os.path.exists("/etc/fedora-release"):
         return Fedora()
 
+    if os.path.exists("/etc/centos-release"):
+        return CentOS()
+
     return None
