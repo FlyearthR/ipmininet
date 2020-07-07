@@ -209,14 +209,14 @@ def enable_ipv6():
     #    f.truncate()
     #update_grub()
 
-    sysctl_cfg = "/etc/sysctl.conf"
-    with open(sysctl_cfg, "r+") as f:
-        data = f.read()
-        f.seek(0)
-        # Comment out lines
-        f.write(re.sub(r'\n(.*disable_ipv6.*)', r'\n#\g<1>', data))
-        f.truncate()
-    sh("sysctl -p")
+    #sysctl_cfg = "/etc/sysctl.conf"
+    #with open(sysctl_cfg, "r+") as f:
+    #    data = f.read()
+    #    f.seek(0)
+    #    # Comment out lines
+    #    f.write(re.sub(r'\n(.*disable_ipv6.*)', r'\n#\g<1>', data))
+    #    f.truncate()
+    #sh("sysctl -p")
 
 
 # Force root
