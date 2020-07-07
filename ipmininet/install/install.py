@@ -201,13 +201,13 @@ def enable_ipv6():
     if dist.NAME == "Debian":
         dist.install("grub-common")
 
-    grub_cfg = "/etc/default/grub"
-    with open(grub_cfg, "r+") as f:
-        data = f.read()
-        f.seek(0)
-        f.write(data.replace("ipv6.disable=1 ", ""))
-        f.truncate()
-    update_grub()
+    #grub_cfg = "/etc/default/grub"
+    #with open(grub_cfg, "r+") as f:
+    #    data = f.read()
+    #    f.seek(0)
+    #    f.write(data.replace("ipv6.disable=1 ", ""))
+    #    f.truncate()
+    #update_grub()
 
     sysctl_cfg = "/etc/sysctl.conf"
     with open(sysctl_cfg, "r+") as f:
