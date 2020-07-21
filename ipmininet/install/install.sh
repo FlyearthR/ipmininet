@@ -165,7 +165,7 @@ function mn_deps {
     if [ "$DIST" = "Fedora" -o "$DIST" = "RedHatEnterpriseServer" -o "$DIST" = "CentOS" ]; then
         $install gcc make socat psmisc xterm openssh-clients iperf \
             iproute telnet python-setuptools libcgroup-tools \
-            ethtool help2man pyflakes pylint python-pep8 python-pexpect
+            ethtool help2man pyflakes pylint python-pep8 python-pexpect net-tools
     elif [ "$DIST" = "SUSE LINUX"  ]; then
 		$install gcc make socat psmisc xterm openssh iperf \
 			iproute telnet ${PYPKG}-setuptools libcgroup-tools \
@@ -395,15 +395,22 @@ function ovs {
     fi
 
     if [ "$DIST" = "CentOS" ]; then
-        yum install wget openssl-devel  python-sphinx gcc make python-devel openssl-devel kernel-devel graphviz kernel-debug-devel autoconf automake rpm-build redhat-rpm-config libtool python-twisted-core python-zope-interface PyQt4 desktop-file-utils libcap-ng-devel groff checkpolicy selinux-policy-devel -y
+        $install wget openssl-devel  python3-sphinx gcc-c++ make python3-devel openssl-devel kernel-devel graphviz kernel-debug-devel autoconf automake rpm-build redhat-rpm-config libtool python-twisted-core python-zope-interface PyQt4 desktop-file-utils libcap-ng-devel groff checkpolicy selinux-policy-devel # unbound unbound-devel readline readline-devel c-ares c-ares-devel
+        #wget http://download.savannah.gnu.org/releases/quagga/quagga-1.2.4.tar.gz
+        #tar -xzf quagga-1.2.4.tar.gz
+        #cd quagga-1.2.4
+        #./configure && make && make install
+        #ldconfig
+	#cd ..
+        #rm -rf quagga-1.2.4 quagga-1.2.4.tar.gz
         useradd ovs
-        su - ovs
-        mkdir -p ~/rpmbuild/SOURCES
-        wget http://openvswitch.org/releases/openvswitch-2.9.2.tar.gz
-        cp openvswitch-2.9.2.tar.gz ~/rpmbuild/SOURCES/
-        tar xfz openvswitch-2.9.2.tar.gz
-        rpmbuild -bb --nocheck openvswitch-2.9.2/rhel/openvswitch-fedora.spec
-        exit
+        su - ovs bash -c " \
+        mkdir -p ~/rpmbuild/SOURCES && \
+        wget http://openvswitch.org/releases/openvswitch-2.13.0.tar.gz && \
+        cp openvswitch-2.13.0.tar.gz ~/rpmbuild/SOURCES/ && \
+        tar xfz openvswitch-2.13.0.tar.gz && \
+        rpmbuild -bb --nocheck openvswitch-2.13.0/rhel/openvswitch-fedora.spec"
+	yum localinstall -y /home/ovs/rpmbuild/RPMS/x86_64/openvswitch-2.13.0-1.el7.x86_64.rpm
         return
     fi
 
