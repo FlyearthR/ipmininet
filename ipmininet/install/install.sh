@@ -282,9 +282,9 @@ function of13 {
 function install_wireshark {
     if ! which wireshark; then
         echo "Installing Wireshark"
-        if [ "$DIST" = "Fedora" -o "$DIST" = "RedHatEnterpriseServer" -o "$DIST" = "CentOS" ]; then
+        if [ "$DIST" = "Fedora" -o "$DIST" = "RedHatEnterpriseServer" ]; then
             $install wireshark wireshark-gnome
-		elif [ "$DIST" = "SUSE LINUX"  ]; then
+		elif [ "$DIST" = "SUSE LINUX" -o "$DIST" = "CentOS" ]; then
 			$install wireshark
         else
             $install wireshark tshark
