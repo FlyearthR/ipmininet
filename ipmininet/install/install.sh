@@ -58,6 +58,12 @@ if [ "$DIST" = "Fedora" -o "$DIST" = "RedHatEnterpriseServer" -o "$DIST" = "Cent
     if ! which lsb_release &> /dev/null; then
         $install redhat-lsb-core
     fi
+    if [ "$DIST" = "CentOS" ]; then
+        $install dnf-plugins-core epel-release
+        sudo yum config-manager --set-enabled PowerTools
+        sudo yum repolist
+    fi
+
 fi
 test -e /etc/SuSE-release && DIST="SUSE Linux"
 if [ "$DIST" = "SUSE Linux" ]; then
@@ -162,10 +168,15 @@ function kernel_clean {
 # Install Mininet deps
 function mn_deps {
     echo "Installing Mininet dependencies"
-    if [ "$DIST" = "Fedora" -o "$DIST" = "RedHatEnterpriseServer" -o "$DIST" = "CentOS" ]; then
+    if [ "$DIST" = "Fedora" -o "$DIST" = "RedHatEnterpriseServer" ]; then
         $install gcc make socat psmisc xterm openssh-clients iperf \
             iproute telnet python-setuptools libcgroup-tools \
             ethtool help2man pyflakes pylint python-pep8 python-pexpect
+    elif [ "$DIST" = "CentOS" ]; then
+        $install gcc make socat psmisc xterm openssh-clients iperf3 \
+            iproute telnet plateform-python-setuptools libcgroup-tools \
+            ethtool help2man python3-pyflakes pylint python3-pexpect
+            sudo pip install pep8
     elif [ "$DIST" = "SUSE LINUX"  ]; then
 		$install gcc make socat psmisc xterm openssh iperf \
 			iproute telnet ${PYPKG}-setuptools libcgroup-tools \
