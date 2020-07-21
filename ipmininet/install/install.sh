@@ -176,7 +176,7 @@ function mn_deps {
         $install gcc make socat psmisc xterm openssh-clients iperf3 \
             iproute telnet platform-python-setuptools libcgroup-tools \
             ethtool help2man python3-pyflakes pylint python3-pexpect
-            sudo pip install pep8
+            sudo pip3 install pep8
     elif [ "$DIST" = "SUSE LINUX"  ]; then
 		$install gcc make socat psmisc xterm openssh iperf \
 			iproute telnet ${PYPKG}-setuptools libcgroup-tools \
