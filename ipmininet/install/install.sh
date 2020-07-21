@@ -174,7 +174,7 @@ function mn_deps {
             ethtool help2man pyflakes pylint python-pep8 python-pexpect
     elif [ "$DIST" = "CentOS" ]; then
         $install gcc make socat psmisc xterm openssh-clients iperf3 \
-            iproute telnet plateform-python-setuptools libcgroup-tools \
+            iproute telnet platform-python-setuptools libcgroup-tools \
             ethtool help2man python3-pyflakes pylint python3-pexpect
             sudo pip install pep8
     elif [ "$DIST" = "SUSE LINUX"  ]; then
